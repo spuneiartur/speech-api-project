@@ -1,6 +1,6 @@
 `use strict`;
 
-export const getResponseFromOpenAI = () => {
+export const getResponseFromOpenAI = (questionFromSpeechAPI) => {
   return "This is a hard coded response from the OpenAI API";
 };
 
