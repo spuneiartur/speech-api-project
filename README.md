@@ -9,4 +9,4 @@ View module is responsible for visual part. In our project it will be represente
 Model module is responsible for managing all the API's and DATA. It works "behind the scenes".
 
 -- Controller folder
-Controller module just connects the Model with the View
+Controller module just connects the Model with the View. It works like a bridge.
