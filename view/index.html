@@ -8,6 +8,90 @@
     <title>Ask a friend</title>
   </head>
   <body>
-    <div class="wrapper"></div>
+    <div class="chat__header">
+      <div class="chat__header_wrapper">
+        <div class="chat__header__logo">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="2em"
+            viewBox="0 0 512 512"
+          >
+            <path
+              d="M226.5 92.9c14.3 42.9-.3 86.2-32.6 96.8s-70.1-15.6-84.4-58.5s.3-86.2 32.6-96.8s70.1 15.6 84.4 58.5zM100.4 198.6c18.9 32.4 14.3 70.1-10.2 84.1s-59.7-.9-78.5-33.3S-2.7 179.3 21.8 165.3s59.7 .9 78.5 33.3zM69.2 401.2C121.6 259.9 214.7 224 256 224s134.4 35.9 186.8 177.2c3.6 9.7 5.2 20.1 5.2 30.5v1.6c0 25.8-20.9 46.7-46.7 46.7c-11.5 0-22.9-1.4-34-4.2l-88-22c-15.3-3.8-31.3-3.8-46.6 0l-88 22c-11.1 2.8-22.5 4.2-34 4.2C84.9 480 64 459.1 64 433.3v-1.6c0-10.4 1.6-20.8 5.2-30.5zM421.8 282.7c-24.5-14-29.1-51.7-10.2-84.1s54-47.3 78.5-33.3s29.1 51.7 10.2 84.1s-54 47.3-78.5 33.3zM310.1 189.7c-32.3-10.6-46.9-53.9-32.6-96.8s52.1-69.1 84.4-58.5s46.9 53.9 32.6 96.8s-52.1 69.1-84.4 58.5z"
+            />
+          </svg>
+        </div>
+        <div class="chat__header__title">
+          <h1>Ask a friend</h1>
+        </div>
+      </div>
+    </div>
+
+    <section class="chat">
+      <div class="_container">
+        <div class="wrapper">
+          <div class="chat__body">
+            <div class="chat__box">
+              <article class="msg-remote">
+                <div class="msg-box">
+                  <div class="flr">
+                    <div class="messages">
+                      <p class="msg" id="msg-1">Lorem ipsum dolor sit amet</p>
+                      <p class="msg" id="msg-2">Praesent varius</p>
+                    </div>
+                    <span class="timestamp"
+                      ><span class="username">Name</span>&bull;<span
+                        class="posttime"
+                        >2 minutes ago</span
+                      ></span
+                    >
+                  </div>
+                  <img
+                    class="user-img"
+                    id="user-0"
+                    src="../assets/images/cat.png"
+                  />
+                </div>
+              </article>
+              <article class="msg-self">
+                <div class="msg-box">
+                  <div class="flr">
+                    <div class="messages">
+                      <p class="msg" id="msg-1">Lorem ipsum dolor sit amet</p>
+                      <p class="msg" id="msg-2">Praesent varius</p>
+                    </div>
+                    <span class="timestamp"
+                      ><span class="username">Name</span>&bull;<span
+                        class="posttime"
+                        >2 minutes ago</span
+                      ></span
+                    >
+                  </div>
+                  <img
+                    class="user-img"
+                    id="user-0"
+                    src="../assets/images/avatar.png"
+                  />
+                </div>
+              </article>
+            </div>
+          </div>
+          <div class="chat__input">
+            <input type="text" class="input" placeholder="Type your message" />
+            <button class="button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="1.5em"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
   </body>
 </html>
