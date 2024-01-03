@@ -2,8 +2,6 @@
 import { OPENAI_TOKEN, OPENAI_API_URL } from "../constants.js";
 
 export const getResponseFromOpenAI = async (questionFromSpeechAPI) => {
-  console.log(OPENAI_API_URL, OPENAI_TOKEN);
-  console.log("questionFromSpeechAPI", questionFromSpeechAPI);
   const response = await axios.post(
     `${OPENAI_API_URL}`,
     {
@@ -24,4 +22,3 @@ export const getResponseFromOpenAI = async (questionFromSpeechAPI) => {
 export const getResponseFromSpeechAPI = () => {
   return "This is a hard coded response from the speech API";
 };
-getResponseFromOpenAI();
