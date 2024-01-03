@@ -1,5 +1,14 @@
 {
   "dependencies": {
     "axios": "^1.6.2"
-  }
+  },
+  "name": "speech-api-project",
+  "description": "We have 3 folders, each one has a specific purpose. It is meant to apply the principle of separation of concerns, we could work at the same time.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }
