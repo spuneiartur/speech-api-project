@@ -326,3 +326,12 @@ h6 {
     height: 40px;
 
 }
+
+
+/* ====================== Canvas ============================ */
+
+#canvas {
+    background-color: var(--primary);
+    margin: 0 0 0 15px;
+    border-radius: 5px;
+}
