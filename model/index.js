@@ -10,7 +10,7 @@ export const getResponseFromOpenAI = async (questionFromSpeechAPI) => {
     },
     {
       headers: {
-        Authorization: `Bearer ${OPENAI_TOKEN}}`,
+        Authorization: `Bearer ${OPENAI_TOKEN}`,
         "Content-Type": "application/json",
       },
     }
