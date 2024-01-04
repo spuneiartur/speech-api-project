@@ -20,5 +20,52 @@ export const getResponseFromOpenAI = async (questionFromSpeechAPI) => {
 };
 
 export const getResponseFromSpeechAPI = () => {
-  return "This is a hard coded response from the speech API";
+  let recognition;
+  let recognizing = false;
+  let finalTranscript = '';
+  
+  if ('webkitSpeechRecognition' in window) {
+    recognition = new webkitSpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+
+    recognition.onstart = function() {
+      recognizing = true;
+    };
+
+    recognition.onerror = function(event) {
+      console.error(event.error);
+    };
+
+    recognition.onend = function() {
+      recognizing = false;
+    };
+
+    recognition.onresult = function(event) {
+      let interimTranscript = '';
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+          finalTranscript += event.results[i][0].transcript;
+        } else {
+          interimTranscript += event.results[i][0].transcript;
+        }
+      }
+     document.querySelector('#chat__inputt .input').value=finalTranscript + interimTranscript;
+      
+    };
+  } else {
+    console.log('webkitSpeechRecognition is not available');
+  }
+
+  document.getElementById('start_button').onclick = function() {
+    if (recognizing) {
+      recognition.stop();
+      return;
+    }
+    recognition.lang = 'en-US';
+    recognition.start();
+  };
 };
+
+
+getResponseFromSpeechAPI();
