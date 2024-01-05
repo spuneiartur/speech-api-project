@@ -78,21 +78,34 @@ const generateChatUser = (text) => {
 };
 
 const getResponseFromOpenAI = async (questionFromSpeechAPI) => {
-  const response = await axios.post(
-    `${OPENAI_API_URL}`,
-    {
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${OPENAI_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
       prompt: questionFromSpeechAPI,
       max_tokens: 100,
       temperature: 0.3,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${OPENAI_TOKEN}`,
-        "Content-Type": "application/json",
-      },
+    }),
+  };
+
+  try {
+    const response = await fetch(OPENAI_API_URL, requestOptions);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
-  );
-  return response.data.choices[0].text;
+
+    const responseData = await response.json();
+    return responseData.choices[0].text;
+    // Handle responseData as needed
+  } catch (error) {
+    console.error("Fetch error:", error.message);
+  }
+
+  return "Sorry, an error occured on the AI side";
 };
 
 const getResponseFromSpeechAPI = () => {
