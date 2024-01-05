@@ -5,8 +5,9 @@ export const getResponseFromOpenAI = async (questionFromSpeechAPI) => {
   const response = await axios.post(
     `${OPENAI_API_URL}`,
     {
-      prompt: "WHat is 2+2",
-      max_tokens: 60,
+      prompt: questionFromSpeechAPI,
+      max_tokens: 100,
+      temperature: 0.3,
     },
     {
       headers: {
@@ -15,8 +16,10 @@ export const getResponseFromOpenAI = async (questionFromSpeechAPI) => {
       },
     }
   );
-
-  return response.data.choices[0].text.trim();
+  return response.data.choices[0].text;
+ 
+  
+  
 };
 
 export const getResponseFromSpeechAPI = () => {
@@ -37,21 +40,24 @@ export const getResponseFromSpeechAPI = () => {
       console.error(event.error);
     };
 
-    recognition.onend = function() {
+    recognition.onend = async function() {
       recognizing = false;
+      const responseFromOpenAI = await getResponseFromOpenAI(finalTranscript );
+      console.log(responseFromOpenAI);
     };
-
-    recognition.onresult = function(event) {
+    recognition.onresult = async function(event) {
       let interimTranscript = '';
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {
-          finalTranscript += event.results[i][0].transcript;
+          finalTranscript = event.results[i][0].transcript;
         } else {
           interimTranscript += event.results[i][0].transcript;
         }
       }
-     document.querySelector('#chat__inputt .input').value=finalTranscript + interimTranscript;
-      
+     
+     document.querySelector('#chat__inputt .input').value=finalTranscript ;
+    
+     
     };
   } else {
     console.log('webkitSpeechRecognition is not available');
@@ -64,8 +70,9 @@ export const getResponseFromSpeechAPI = () => {
     }
     recognition.lang = 'en-US';
     recognition.start();
+    //makes the speech recognition stop after 5 seconds
+    setTimeout(() => recognition.stop(), 5000);
   };
 };
 
-
-getResponseFromSpeechAPI();
+//getResponseFromSpeechAPI();
