@@ -1,5 +1,6 @@
 `use strict`;
 import { OPENAI_TOKEN, OPENAI_API_URL } from "../constants.js";
+import { generateChatAI, generateChatUser } from "../view/view.js";
 
 export const getResponseFromOpenAI = async (questionFromSpeechAPI) => {
   const response = await axios.post(
@@ -17,36 +18,35 @@ export const getResponseFromOpenAI = async (questionFromSpeechAPI) => {
     }
   );
   return response.data.choices[0].text;
- 
-  
-  
 };
 
 export const getResponseFromSpeechAPI = () => {
   let recognition;
   let recognizing = false;
-  let finalTranscript = '';
-  
-  if ('webkitSpeechRecognition' in window) {
+  let finalTranscript = "";
+
+  if ("webkitSpeechRecognition" in window) {
     recognition = new webkitSpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
 
-    recognition.onstart = function() {
+    recognition.onstart = function () {
       recognizing = true;
     };
 
-    recognition.onerror = function(event) {
+    recognition.onerror = function (event) {
       console.error(event.error);
     };
 
-    recognition.onend = async function() {
+    recognition.onend = async function () {
       recognizing = false;
-      const responseFromOpenAI = await getResponseFromOpenAI(finalTranscript );
-      console.log(responseFromOpenAI);
+      document.getElementById("start_button").classList.add("disabled");
+      const responseFromOpenAI = await getResponseFromOpenAI(finalTranscript);
+      generateChatAI(responseFromOpenAI);
+      document.getElementById("start_button").classList.remove("disabled");
     };
-    recognition.onresult = async function(event) {
-      let interimTranscript = '';
+    recognition.onresult = async function (event) {
+      let interimTranscript = "";
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {
           finalTranscript = event.results[i][0].transcript;
@@ -54,25 +54,26 @@ export const getResponseFromSpeechAPI = () => {
           interimTranscript += event.results[i][0].transcript;
         }
       }
-     
-     document.querySelector('#chat__inputt .input').value=finalTranscript ;
-    
-     
+
+      document.querySelector("#chat__inputt .input").value = finalTranscript;
+      if (finalTranscript.trim().length !== 0) {
+        generateChatUser(finalTranscript);
+      }
     };
   } else {
-    console.log('webkitSpeechRecognition is not available');
+    console.log("webkitSpeechRecognition is not available");
   }
 
-  document.getElementById('start_button').onclick = function() {
+  document.getElementById("start_button").onclick = function () {
     if (recognizing) {
       recognition.stop();
       return;
     }
-    recognition.lang = 'en-US';
+    recognition.lang = "en-US";
     recognition.start();
     //makes the speech recognition stop after 5 seconds
-    setTimeout(() => recognition.stop(), 5000);
+    setTimeout(() => {
+      recognition.stop();
+    }, 5000);
   };
 };
-
-//getResponseFromSpeechAPI();

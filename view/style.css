@@ -312,6 +312,10 @@ h6 {
     background-color: var(--primary);
 }
 
+.button.disabled {
+    cursor: not-allowed;
+}
+
 #user_id {
     background-color: #FFEBCD;
     border-radius: 20px;
