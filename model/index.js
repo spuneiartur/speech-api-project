@@ -86,6 +86,7 @@ export const getResponseFromSpeechAPI = () => {
 
     recognition.onend = async function () {
       recognizing = false;
+      generateChatUser(finalTranscript);
       document.getElementById("start_button").classList.add("disabled");
       const responseFromOpenAI = await getResponseFromOpenAI(finalTranscript);
       generateChatAI(responseFromOpenAI);
@@ -102,9 +103,9 @@ export const getResponseFromSpeechAPI = () => {
       }
 
       document.querySelector("#chat__inputt .input").value = finalTranscript;
-      if (finalTranscript.trim().length !== 0) {
-        generateChatUser(finalTranscript);
-      }
+      // if (finalTranscript.trim().length !== 0) {
+      //   generateChatUser(finalTranscript);
+      // }
     };
   } else {
     console.log("webkitSpeechRecognition is not available");
